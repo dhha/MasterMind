@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.Grade.FragmentGradeCaculator">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:inputType="text"
+        android:id="@+id/fullName"
+        android:hint="full name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large">
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:inputType="text"
+        android:id="@+id/course"
+        android:hint="course"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+         android:layout_weight="10"
+        android:inputType="text"
+        android:id="@+id/quizScore"
+        android:hint="quiz"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large">
+    </EditText>
+    <EditText
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="10"
+        android:inputType="text"
+        android:id="@+id/midScore"
+        android:hint="mid"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large">
+    </EditText>
+    <EditText
+        android:id="@+id/assignment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:inputType="text"
+        android:hint="assignment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large">
+    </EditText>
+
+    <EditText
+        android:id="@+id/finalScore"
+         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:hint="final"
+        android:inputType="textMultiLine"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="20dp"
+        android:gravity="top"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:id="@+id/save"
+        android:text="calculateGrade"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true">
+    </Button>
+
+</LinearLayout>
