@@ -27,5 +27,6 @@
         app:backgroundTint="@color/primary"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="createSchedule"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
