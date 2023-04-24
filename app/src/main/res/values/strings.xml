@@ -23,6 +23,7 @@
     <string name="fragment_task_category_label">Category</string>
     <string name="fragment_task_description_label">Description</string>
     <string name="fragment_task_description_hint">Add a description</string>
+    <string name="fragment_task_list_attachment_label">Attachments</string>
 
     <string name="fragment_task_tap_to_add_attachment_hint">Tap to add attachments</string>
     <string name="fragment_task_header_basic_info">Basic Info</string>
@@ -34,6 +35,26 @@
     <string name="datepicker_cancel">CANCEL</string>
     <string name="datepicker_ok">OK</string>
 
+    //Edit One-Time reminder fragment
+    <string name="fragment_edit_one_time_reminder_date_title">Date</string>
+    <string name="fragment_edit_one_time_reminder_date_hint">Enter a date</string>
+    <string name="fragment_edit_one_time_reminder_time_title">Time</string>
+    <string name="fragment_edit_one_time_reminder_time_hint">Enter a time</string>
+
+    //Edit Repeating reminder fragment
+    <string name="fragment_edit_repeating_reminder_date_title">Date</string>
+    <string name="fragment_edit_repeating_reminder_date_hint">Enter a date</string>
+    <string name="fragment_edit_repeating_reminder_time_title">Time</string>
+    <string name="fragment_edit_repeating_reminder_time_hint">Enter a time</string>
+    <string name="fragment_edit_repeating_reminder_repeat_title">Repeat</string>
+    <string name="fragment_edit_repeating_reminder_repeat_interval_every">Every</string>
+    <string name="fragment_edit_repeating_reminder_repeat_interval_days">Day(s)</string>
+    <string name="fragment_edit_repeating_reminder_repeat_interval_weeks">Week(s)</string>
+    <string name="fragment_edit_repeating_reminder_repeat_interval_months">Month(s)</string>
+    <string name="fragment_edit_repeating_reminder_repeat_interval_years">Year(s)</string>
+    <string name="fragment_edit_repeating_reminder_repeat_end_until_date">Until</string>
+    <string name="fragment_edit_repeating_reminder_repeat_end_for_x_events_1">For</string>
+    <string name="fragment_edit_repeating_reminder_repeat_end_for_x_events_2">event(s)</string>
 
     /* Audio Attachment ViewHolder */
     <string name="dialog_audio_attachment_options_replace">Replace audio</string>
@@ -220,4 +241,15 @@
 
     <string name="ttsu_activity_place_radius_icon_title">Adjust the radius</string>
     <string name="ttsu_activity_place_radius_icon_description">Use the slider to tweak the detection radius</string>
+    <string name="fragment_course_title_label">Course</string>
+    <string name="sub_create_schedule">Create new schedule</string>
+    <string name="sub_create_course">Create new course</string>
+    <string name="fragment_course_name_label">Name</string>
+    <string name="fragment_course_name_label_hint">Enter course name</string>
+    <string name="fragment_course_dest_label">Description</string>
+    <string name="fragment_course_dest_label_hint">Enter course description</string>
+    <string name="fragment_course_professor_label">Professor Name</string>
+    <string name="fragment_course_professor_hint">Enter professor name</string>
+    <string name="fragment_course_location_label">Location</string>
+    <string name="fragment_course_location_hint">Enter location</string>
 </resources>
