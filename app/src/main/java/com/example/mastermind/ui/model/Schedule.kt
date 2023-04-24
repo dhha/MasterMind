@@ -6,7 +6,7 @@ import java.sql.Time
 import java.util.Date
 
 @Entity
-data class Schedule(val course: Course, val name:String, val description: String, val date: Date, val time: Time) : java.io.Serializable {
+data class Schedule(val course: Course, val name:String, val description: String, val date: Date, val time: Time, val attachments: List<Attachment>) : java.io.Serializable {
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 }

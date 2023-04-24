@@ -34,10 +34,18 @@
     <fragment
         android:id="@+id/createScheduleFragment"
         android:name="com.example.mastermind.ui.home.CreateScheduleFragment"
-        android:label="fragment_create_schedule"
+        android:label="@string/sub_create_schedule"
         tools:layout="@layout/fragment_create_schedule" >
         <action
             android:id="@+id/action_createScheduleFragment_to_nav_schedule"
             app:destination="@id/nav_schedule" />
+        <action
+            android:id="@+id/action_createScheduleFragment_to_createCourseFragment"
+            app:destination="@id/createCourseFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createCourseFragment"
+        android:name="com.example.mastermind.ui.home.CreateCourseFragment"
+        android:label="@string/sub_create_course"
+        tools:layout="@layout/fragment_create_course" />
 </navigation>

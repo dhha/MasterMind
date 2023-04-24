@@ -7,6 +7,9 @@
     tools:context=".ui.home.CreateScheduleFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/fragment_task_basic_info_container"
         android:layout_width="match_parent"
@@ -19,16 +22,39 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:text="@string/fragment_course_title_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/listCourses"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Select course"/>
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/btn_create_course"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_add"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/fab_accept_green" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/btn_create_course"
+                    android:layout_toLeftOf="@id/btn_create_course" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="@string/fragment_course_title_label" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/listCourses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="Select course"/>
+                </LinearLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -94,13 +120,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_edit_repeating_reminder_date_title" />
-            <EditText
-                android:id="@+id/fragment_edit_repeating_reminder_date"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/fragment_edit_repeating_reminder_date_hint"
-                android:inputType="none" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/reminder_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/fragment_edit_repeating_reminder_date_hint"
+                    android:layout_toStartOf="@id/datePicker"
+                    android:layout_toLeftOf="@id/datePicker"
+                    android:inputType="none" />
+                <ImageButton
+                    android:id="@+id/datePicker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:tint="@color/gray_700"
+                    android:src="@drawable/icon_calendar"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -112,14 +153,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_edit_repeating_reminder_time_title" />
-
-            <EditText
-                android:id="@+id/fragment_edit_repeating_reminder_time"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/fragment_edit_repeating_reminder_time_hint"
-                android:inputType="none" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/reminder_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:layout_toStartOf="@id/timePicker"
+                    android:layout_toLeftOf="@id/timePicker"
+                    android:hint="@string/fragment_edit_repeating_reminder_time_hint"
+                    android:inputType="none" />
+                <ImageButton
+                    android:id="@+id/timePicker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_time"
+                    android:tint="@color/gray_700"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -132,9 +186,32 @@
                 android:layout_height="match_parent"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+            <Button
+                android:id="@+id/save_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"/>
 
+            <Button
+                android:id="@+id/cancel_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:text="Cancel"/>
+        </LinearLayout>
     </LinearLayout>
-
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fragment_task_add_attachment"
