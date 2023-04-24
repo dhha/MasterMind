@@ -9,7 +9,11 @@
         android:id="@+id/nav_schedule"
         android:name="com.example.mastermind.ui.home.HomeFragment"
         android:label="@string/menu_schedule"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_schedule_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_note"
@@ -27,4 +31,13 @@
         android:name="com.example.mastermind.ui.timer.FragmenTimer"
         android:label="@string/menu_timer"
         tools:layout="@layout/fragment_fragmen_timer" />
+    <fragment
+        android:id="@+id/createScheduleFragment"
+        android:name="com.example.mastermind.ui.home.CreateScheduleFragment"
+        android:label="fragment_create_schedule"
+        tools:layout="@layout/fragment_create_schedule" >
+        <action
+            android:id="@+id/action_createScheduleFragment_to_nav_schedule"
+            app:destination="@id/nav_schedule" />
+    </fragment>
 </navigation>

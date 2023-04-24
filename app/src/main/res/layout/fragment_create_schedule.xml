@@ -4,16 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateScheduleActivity">
+    tools:context=".ui.home.CreateScheduleFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id="@+id/fragment_task_basic_info_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <TextView
+                android:text="@string/fragment_course_title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/listCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Select course"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,8 +61,6 @@
                     />
             </LinearLayout>
 
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -70,13 +85,55 @@
                 />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_task_recycler"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </LinearLayout>
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_edit_repeating_reminder_date_title" />
+            <EditText
+                android:id="@+id/fragment_edit_repeating_reminder_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="@string/fragment_edit_repeating_reminder_date_hint"
+                android:inputType="none" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_edit_repeating_reminder_time_title" />
+
+            <EditText
+                android:id="@+id/fragment_edit_repeating_reminder_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="@string/fragment_edit_repeating_reminder_time_hint"
+                android:inputType="none" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_task_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <com.github.clans.fab.FloatingActionMenu
@@ -165,5 +222,4 @@
         android:textSize="14sp"
         android:visibility="invisible"
         />
-
 </RelativeLayout>

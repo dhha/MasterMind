@@ -1,9 +1,9 @@
 package com.example.mastermind.ui.adapter
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mastermind.databinding.ScheduleItemBinding
+import com.example.mastermind.ui.model.Schedule
 
 class ScheduleAdapter(
     private val schedules: List<Schedule>
