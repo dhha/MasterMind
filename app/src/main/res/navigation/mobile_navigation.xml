@@ -17,12 +17,13 @@
         android:label="@string/menu_note"
         tools:layout="@layout/fragment_note_taking" />
 
-    <fragment
-        android:id="@+id/nav_grade"
-        android:name="com.example.mastermind.ui.Grade.FragmentGradeCaculator"
-        android:label="@string/menu_grade"
-        tools:layout="@layout/fragment_grade_caculator" />
-    <fragment
+   <fragment
+       android:id="@+id/nav_grade"
+       android:name="com.example.mastermind.ui.Grade.FragmentGradeCaculator"
+       android:label="@string/menu_grade"
+      tools:layout="@layout/fragment_grade_caculator" />
+
+  <fragment
         android:id="@+id/nav_timer"
         android:name="com.example.mastermind.ui.timer.FragmenTimer"
         android:label="@string/menu_timer"

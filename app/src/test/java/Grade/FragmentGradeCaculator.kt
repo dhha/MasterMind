@@ -1,18 +1,14 @@
 package com.example.mastermind.ui.Grade
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mastermind.CreateScheduleActivity
 import com.example.mastermind.R
 import com.example.mastermind.databinding.FragmentGradeCaculatorBinding
-import com.example.mastermind.myActivity
 
 class FragmentGradeCaculator : Fragment() {
 private lateinit var binding: FragmentGradeCaculatorBinding
@@ -27,20 +23,9 @@ private lateinit var lists:ArrayList<Student>
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_grade_caculator, container, false)
      binding= FragmentGradeCaculatorBinding.bind(view)
-
-        binding.activityMy.setOnClickListener {
-            val intent = Intent(requireContext(), myActivity::class.java)
-            startActivity(intent)
-        }
-
         return binding.root
-
-     /*   lists=ArrayList<Student>()
-
-        var adp=StudentAdapter(lists)*/
-
-
-
+        lists=ArrayList<Student>()
+        binding.re
 
        /* lists= ArrayList<Student>()
         lists.add(
@@ -57,5 +42,4 @@ private lateinit var lists:ArrayList<Student>
 
 
     }
-
 }

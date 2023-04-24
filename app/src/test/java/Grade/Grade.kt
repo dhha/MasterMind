@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 data class Grade(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val fullName: String,
     val course: String,
     val quizScore: Double,
     val midScore: Double,
