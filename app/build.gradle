@@ -54,6 +54,7 @@ dependencies {
     // Kotlin Coroutines
     implementation "androidx.room:room-ktx:$room_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'com.github.clans:fab:1.6.4'
 
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
