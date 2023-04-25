@@ -25,7 +25,11 @@
        android:id="@+id/nav_grade"
        android:name="com.example.mastermind.ui.Grade.FragmentGradeCaculator"
        android:label="@string/menu_grade"
-      tools:layout="@layout/fragment_grade_caculator" />
+      tools:layout="@layout/fragment_grade_caculator" >
+       <action
+           android:id="@+id/action_nav_schedule_to_gradeGragment"
+           app:destination="@id/gradeGragment" />
+   </fragment>
 
   <fragment
         android:id="@+id/nav_timer"
@@ -49,4 +53,24 @@
         android:name="com.example.mastermind.ui.home.CreateCourseFragment"
         android:label="@string/sub_create_course"
         tools:layout="@layout/fragment_create_course" />
+    <fragment
+        android:id="@+id/gradeGragment"
+        android:name="com.example.mastermind.gradeGragment"
+        android:label="fragment_grade"
+        tools:layout="@layout/fragment_grade" >
+
+        <action
+            android:id="@+id/action_gradeGragment_to_nav_grade"
+            app:destination="@id/nav_grade" />
+        <argument
+            android:name="Grade"
+            app:argType="com.example.mastermind.ui.Grade.Grade"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <activity
+        android:id="@+id/myActivity"
+        android:name="com.example.mastermind.myActivity"
+        android:label="activity_my"
+        tools:layout="@layout/activity_my" />
 </navigation>

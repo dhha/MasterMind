@@ -21,10 +21,7 @@ import androidx.room.RoomDatabase
               instance = it
           }
       }
-
       private fun buildDatabase(context: Context)=Room.databaseBuilder(context.applicationContext,
       GradeDatabase::class.java, "gradedatabase").build()
-
   }
-
 }

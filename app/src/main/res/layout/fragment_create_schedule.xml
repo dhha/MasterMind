@@ -136,10 +136,10 @@
                     android:id="@+id/datePicker"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:tint="@color/gray_700"
                     android:src="@drawable/icon_calendar"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="UseAppTint" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -172,7 +172,8 @@
                     android:src="@drawable/icon_time"
                     android:tint="@color/gray_700"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="UseAppTint" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -212,91 +213,15 @@
         </LinearLayout>
     </LinearLayout>
     </ScrollView>
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fragment_task_add_attachment"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/fab_margin"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:menu_animationDelayPerItem="30"
-        app:menu_backgroundColor="@android:color/transparent"
-        app:menu_buttonSpacing="6dp"
-        app:menu_colorNormal="@color/primary"
-        app:menu_colorPressed="@color/primary"
-        app:menu_fab_size="normal"
-        app:menu_icon="@drawable/icon_attachment"
-        app:menu_showShadow="false">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_audio_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_audio_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_image_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_image_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_link_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_link_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_text_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_text_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_list_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_list_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-    </com.github.clans.fab.FloatingActionMenu>
-
-
     <TextView
         android:id="@+id/fragment_task_add_attachment_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="34dp"
-        android:layout_toLeftOf="@id/fragment_task_add_attachment"
-        android:layout_toStartOf="@id/fragment_task_add_attachment"
         android:layout_alignParentBottom="true"
         android:textColor="@color/gray_700"
         android:lines="1"
         android:textSize="14sp"
         android:visibility="invisible"
-        />
+        tools:ignore="UnknownId" />
 </RelativeLayout>

@@ -8,16 +8,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mastermind.CreateScheduleActivity
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+
 import com.example.mastermind.R
 import com.example.mastermind.databinding.FragmentGradeCaculatorBinding
 import com.example.mastermind.myActivity
+import kotlinx.coroutines.launch
 
-class FragmentGradeCaculator : Fragment() {
+class FragmentGradeCaculator : BaseFragment() {
 private lateinit var binding: FragmentGradeCaculatorBinding
 
-private lateinit var lists:ArrayList<Student>
+private lateinit var lists:ArrayList<Grade>
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
@@ -28,34 +31,29 @@ private lateinit var lists:ArrayList<Student>
         var view = inflater.inflate(R.layout.fragment_grade_caculator, container, false)
      binding= FragmentGradeCaculatorBinding.bind(view)
 
-        binding.activityMy.setOnClickListener {
-            val intent = Intent(requireContext(), myActivity::class.java)
-            startActivity(intent)
-        }
-
         return binding.root
 
-     /*   lists=ArrayList<Student>()
-
-        var adp=StudentAdapter(lists)*/
-
-
-
-
-       /* lists= ArrayList<Student>()
-        lists.add(
-            Student(1,"Lemessa Adugna", "Kotlin",
-        25,25,25,20.7)
-        )
-        lists.add(Student(2,"Lemessa Adugna", "Kotlin",
-            25,25,25,20))
-
-        binding.re.layoutManager=LinearLayoutManager(this)
-        var adp=StudentAdapter(lists)
-   binding.re.adapter=adp*/
-
-
-
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.listOfGrade.setHasFixedSize(true)
+        binding.listOfGrade.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+
+        launch {
+            context?.let {
+                val grades= GradeDatabase(it).getGradeDao().getAllGrade()
+                binding.listOfGrade.adapter=StudentAdapter(grades)
+            }
+        }
+
+        binding.activityMy.setOnClickListener {
+            val direction= FragmentGradeCaculatorDirections.actionNavScheduleToGradeGragment()
+            findNavController().navigate(direction)
+
+        }
+    }
+
 
 }

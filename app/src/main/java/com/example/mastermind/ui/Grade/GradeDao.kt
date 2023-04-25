@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface GradeDao {
     @Query("SELECT*FROM Grade")
-    suspend fun getgrade():List<Grade>
+    suspend fun getAllGrade():List<Grade>
     @Insert
     suspend fun addGrade(grade:Grade)
     @Delete

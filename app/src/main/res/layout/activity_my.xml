@@ -67,7 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:id="@+id/save"
-            android:text="calculate"
+            android:text="submit"
+            android:textAllCaps="false"
             android:textSize="20sp"
             android:onClick="saving"
             android:layout_alignParentTop="true">
@@ -78,7 +79,19 @@
             android:layout_weight="50"
             android:id="@+id/reset"
             android:text="Reset"
+            android:textAllCaps="false"
             android:onClick="resetting"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true">
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:id="@+id/delete"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:onClick="deleting"
             android:textSize="20sp"
             android:layout_alignParentTop="true">
         </Button>

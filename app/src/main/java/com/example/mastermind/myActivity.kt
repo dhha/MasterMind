@@ -3,10 +3,20 @@ package com.example.mastermind
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.example.mastermind.databinding.ActivityMyBinding
+import com.example.mastermind.ui.Grade.Grade
+import com.example.mastermind.ui.Grade.GradeDatabase
+
+import kotlinx.coroutines.launch
+
+
 
 class myActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMyBinding
+    private var gradin:Grade?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMyBinding.inflate(layoutInflater)
@@ -35,8 +45,52 @@ class myActivity : AppCompatActivity() {
           }
 
         binding.score.text= "The grade for the $course is : $grade"
+        /*
+        *     launch {
+                /* NoteDatabase needs an context argument, if it is not null
+                let perform add or update query
+                */
+                context?.let {
+                    val mNote = Note(noteTitle, noteBody)
+                    // note == null means Inserting a new Note
+                    if (note == null) {
+                        NoteDatabase(it).getNoteDao().addNote(mNote)
+                        it.toast("Note Saved")
+                    } else {
+                        // Update the note
+                        mNote.id = note!!.id
+                        //   mNote.title = noteTitle
+                        NoteDatabase(it).getNoteDao().updateNote(mNote)
+                        it.toast("Note Updated")
+                    }
+                    // Automatically after adding a note need to return to Home_Fragment as per the navigation directions
+                    val action = AddNoteFragmentDirections.actionSaveNote()
+                    Navigation.findNavController(view).navigate(action)
+                }
+            }*/
+    /*    lifecycleScope.launch{
+            applicationContext?.let {
 
-    }
+                var gra = Grade(course,quiz,mid, assignment,final, grade)
+                // note == null means Inserting a new Note
+
+                    if(gradin==null) {
+                        GradeDatabase(applicationContext).getGradeDao().addGrade(gra)
+//                        Toast.makeText(this, "Note Saved", Toast.LENGTH_LONG).show
+                    }
+
+
+
+                // Automatically after adding a note need to return to Home_Fragment as per the navigation directions
+
+            }
+
+            }*/
+
+        }
+
+
+
     fun resetting(view: View){
         binding.course.setText("")
         binding.quizScore.setText("")
@@ -45,5 +99,7 @@ class myActivity : AppCompatActivity() {
         binding.finalScore.setText("")
     }
 }
+
+
 
 
