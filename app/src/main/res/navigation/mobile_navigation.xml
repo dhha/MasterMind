@@ -47,12 +47,24 @@
         <action
             android:id="@+id/action_createScheduleFragment_to_createCourseFragment"
             app:destination="@id/createCourseFragment" />
+        <action
+            android:id="@+id/action_createScheduleFragment_to_audioRecordFragment"
+            app:destination="@id/audioRecordFragment" />
     </fragment>
     <fragment
         android:id="@+id/createCourseFragment"
         android:name="com.example.mastermind.ui.home.CreateCourseFragment"
         android:label="@string/sub_create_course"
         tools:layout="@layout/fragment_create_course" />
+    <fragment
+        android:id="@+id/audioRecordFragment"
+        android:name="com.example.mastermind.ui.home.AudioRecordFragment"
+        android:label="@string/fragment_audio_record"
+        tools:layout="@layout/fragment_audio_record" >
+        <action
+            android:id="@+id/action_audioRecordFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gradeGragment"
         android:name="com.example.mastermind.gradeGragment"
@@ -68,9 +80,4 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <activity
-        android:id="@+id/myActivity"
-        android:name="com.example.mastermind.myActivity"
-        android:label="activity_my"
-        tools:layout="@layout/activity_my" />
 </navigation>

@@ -29,6 +29,11 @@ class CreateScheduleFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
+        binding.fragmentTaskAddAudioAttachment.setOnClickListener {
+            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToAudioRecordFragment()
+            findNavController().navigate(direction)
+        }
+
         binding.datePicker.setOnClickListener {
             val c = Calendar.getInstance() // Current Date
             val mYear = c.get(Calendar.YEAR)
@@ -60,14 +65,4 @@ class CreateScheduleFragment : Fragment() {
         return binding.root
     }
 
-    fun dateTimePicker(view: View) {
-        when(view?.id){
-            R.id.datePicker -> {
-
-            }
-//                R.id.bt2 -> {
-//
-//                }
-        }
-    }
 }

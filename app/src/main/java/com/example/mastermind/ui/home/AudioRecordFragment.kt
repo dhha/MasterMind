@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mastermind.R
+import com.example.mastermind.databinding.FragmentAudioRecordBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -13,13 +14,15 @@ import com.example.mastermind.R
  * create an instance of this fragment.
  */
 class AudioRecordFragment : Fragment() {
-    // TODO: Rename and change types of parameters }
+    private lateinit var binding: FragmentAudioRecordBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_audio_record, container, false)
+        val view = inflater.inflate(R.layout.fragment_audio_record, container, false)
+        binding = FragmentAudioRecordBinding.bind(view)
+        return binding.root
     }
 
 }
