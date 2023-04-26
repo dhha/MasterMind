@@ -26,6 +26,15 @@ class ScheduleAdapter(
             itemTaskProgrammedOneTimeDescription.text = schedule.description
             itemTaskProgrammedOneTimeDate.text = schedule.date
             itemTaskProgrammedOneTimeTime.text = schedule.time
+            if(schedule.audio != null) {
+                itemTaskProgrammedOneTimeAttachmentAudio.setColorFilter(R.color.icons_enabled)
+            }
+            if(schedule.image != null) {
+                itemTaskProgrammedOneTimeAttachmentImage.setColorFilter(R.color.icons_enabled)
+            }
+            if(schedule.file != null) {
+                itemTaskProgrammedOneTimeAttachmentLink.setColorFilter(R.color.icons_enabled)
+            }
         }
     }
 

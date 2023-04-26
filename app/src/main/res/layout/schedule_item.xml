@@ -19,7 +19,7 @@
             android:layout_height="@dimen/item_task_category_icon_size"
             android:layout_marginRight="6dp"
             android:layout_marginEnd="6dp"
-            android:src="@drawable/icon_category_personal"
+            android:src="@drawable/baseline_list_alt_24"
             />
 
         <ImageView

@@ -54,6 +54,10 @@
         android:name="com.example.mastermind.ui.home.CreateScheduleFragment"
         android:label="@string/sub_create_schedule"
         tools:layout="@layout/fragment_create_schedule" >
+        <argument
+            android:name="path"
+            app:argType="string"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_createScheduleFragment_to_nav_schedule"
             app:destination="@id/nav_schedule" />
@@ -81,6 +85,7 @@
         android:name="com.example.mastermind.ui.home.AudioRecordFragment"
         android:label="@string/fragment_audio_record"
         tools:layout="@layout/fragment_audio_record" >
+
         <action
             android:id="@+id/action_audioRecordFragment_to_createScheduleFragment"
             app:destination="@id/createScheduleFragment" />

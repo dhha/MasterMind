@@ -27,7 +27,7 @@ class CreateCourseFragment : Fragment() {
         binding = FragmentCreateCourseBinding.bind(view)
 
         binding.cancelCourse.setOnClickListener {
-            val direction = CreateCourseFragmentDirections.actionCreateCourseFragmentToCreateScheduleFragment()
+            val direction = CreateCourseFragmentDirections.actionCreateCourseFragmentToCreateScheduleFragment(null)
             findNavController().navigate(direction)
         }
         binding.saveCourse.setOnClickListener {
@@ -43,7 +43,7 @@ class CreateCourseFragment : Fragment() {
                 }
             }
 
-            val direction = CreateCourseFragmentDirections.actionCreateCourseFragmentToCreateScheduleFragment()
+            val direction = CreateCourseFragmentDirections.actionCreateCourseFragmentToCreateScheduleFragment(null)
             findNavController().navigate(direction)
         }
         return binding.root

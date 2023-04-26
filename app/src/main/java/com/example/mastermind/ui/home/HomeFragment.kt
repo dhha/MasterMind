@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         binding.activityHomeFab.setOnClickListener {
 //            val intent = Intent(requireContext(), CreateScheduleFragment::class.java)
 //            startActivity(intent)
-            val direction = HomeFragmentDirections.actionNavScheduleToCreateScheduleFragment()
+            val direction = HomeFragmentDirections.actionNavScheduleToCreateScheduleFragment(null)
             findNavController().navigate(direction)
         }
         return root
