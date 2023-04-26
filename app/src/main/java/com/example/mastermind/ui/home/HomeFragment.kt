@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mastermind.databinding.FragmentHomeBinding
+import com.example.mastermind.ui.adapter.ScheduleAdapter
+import com.example.mastermind.ui.model.MasterMindDatabase
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +33,19 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //Get all schedule
+        lifecycleScope.launch {
+            context?.let {
+                var schedules = MasterMindDatabase(it).getScheduleDao().getAllSchedule()
+                val adapter = schedules?.let {
+                    ScheduleAdapter(schedules)
+                }
+
+                binding.listSchedule.layoutManager = LinearLayoutManager(it)
+                binding.listSchedule.adapter = adapter
+            }
+        }
 
         binding.activityHomeFab.setOnClickListener {
 //            val intent = Intent(requireContext(), CreateScheduleFragment::class.java)

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,6 +30,7 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/icon_text"
             android:tint="@color/icons_disabled"
+            android:visibility="invisible"
             />
 
         <ImageView
@@ -71,6 +71,7 @@
             android:layout_toStartOf="@id/item_task_programmed_one_time_attachment_link"
             android:src="@drawable/icon_list"
             android:tint="@color/icons_disabled"
+            android:visibility="invisible"
             />
 
         <TextView

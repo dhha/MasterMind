@@ -50,12 +50,19 @@
         <action
             android:id="@+id/action_createScheduleFragment_to_audioRecordFragment"
             app:destination="@id/audioRecordFragment" />
+        <action
+            android:id="@+id/action_createScheduleFragment_to_nav_schedule2"
+            app:destination="@id/nav_schedule" />
     </fragment>
     <fragment
         android:id="@+id/createCourseFragment"
         android:name="com.example.mastermind.ui.home.CreateCourseFragment"
         android:label="@string/sub_create_course"
-        tools:layout="@layout/fragment_create_course" />
+        tools:layout="@layout/fragment_create_course" >
+        <action
+            android:id="@+id/action_createCourseFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/audioRecordFragment"
         android:name="com.example.mastermind.ui.home.AudioRecordFragment"
