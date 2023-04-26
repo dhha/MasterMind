@@ -8,13 +8,15 @@ import com.example.mastermind.ui.Grade.Grade
 import com.example.mastermind.ui.Grade.GradeDao
 
 @Database(
-    entities = [Grade::class, Attachment::class, Course::class, Schedule::class],
-    version = 4
+    entities = [Grade::class, Attachment::class, Course::class, Schedule::class, Notes::class],
+    version = 5
 )
 abstract class MasterMindDatabase: RoomDatabase(){
     abstract fun getGradeDao(): GradeDao
     abstract fun getCourseDao(): CourseDao
     abstract fun getScheduleDao(): ScheduleDao
+
+    abstract fun getNoteDao(): NoteDao
 
     companion object{
         @Volatile
