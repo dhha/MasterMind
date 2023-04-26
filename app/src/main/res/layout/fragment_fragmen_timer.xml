@@ -6,33 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.timer.FragmentTimer">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CS233"
-            android:gravity="center"
-            android:textSize="30dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mobile Devile Programming"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            />
 
-    </com.google.android.material.card.MaterialCardView>
+
+
 
 </FrameLayout>
