@@ -19,7 +19,20 @@
         android:id="@+id/nav_note"
         android:name="com.example.mastermind.ui.Note.FragmentNoteTaking"
         android:label="@string/menu_note"
-        tools:layout="@layout/fragment_note_taking" />
+        tools:layout="@layout/fragment_note_taking" >
+        <action
+            android:id="@+id/action_nav_note_to_noteFragmentDelRecycler"
+            app:destination="@id/noteFragmentDelRecycler" />
+        <action
+            android:id="@+id/action_nav_note_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_nav_note_to_noteFragmentRecycler"
+            app:destination="@id/noteFragmentRecycler" />
+        <action
+            android:id="@+id/action_nav_note_to_noteFragmentRecycler2"
+            app:destination="@id/noteFragmentRecycler" />
+    </fragment>
 
    <fragment
        android:id="@+id/nav_grade"
@@ -86,5 +99,49 @@
             app:argType="com.example.mastermind.ui.Grade.Grade"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragmentDelRecycler"
+        android:name="com.example.mastermind.ui.Note.NoteFragmentDelRecycler"
+        android:label="NoteFragmentDelRecycler" >
+        <action
+            android:id="@+id/action_noteFragmentDelRecycler_to_nav_note"
+            app:destination="@id/nav_note" />
+        <action
+            android:id="@+id/action_noteFragmentDelRecycler_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.mastermind.ui.Note.AddFragment"
+        android:label="AddFragment" >
+        <action
+            android:id="@+id/action_addFragment_to_nav_note"
+            app:destination="@id/nav_note" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragmentRecycler"
+        android:name="com.example.mastermind.ui.Note.NoteFragmentRecycler"
+        android:label="NoteFragmentRecycler" >
+        <action
+            android:id="@+id/action_noteFragmentRecycler_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_noteFragmentRecycler_to_nav_note"
+            app:destination="@id/nav_note" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.studentnotes.UpdateFragment"
+        android:label="UpdateFragment" >
+        <action
+            android:id="@+id/action_updateFragment_to_nav_note"
+            app:destination="@id/nav_note" />
+        <action
+            android:id="@+id/action_updateFragment_to_noteFragmentRecycler"
+            app:destination="@id/noteFragmentRecycler" />
+        <argument
+            android:name="currentNote"
+            app:argType="com.example.mastermind.ui.model.Notes" />
     </fragment>
 </navigation>
