@@ -21,6 +21,7 @@ class CreateTimerFragment : Fragment() {
 
         binding = FragmentCreateTimerBinding.bind(view)
 
+
         return binding.root
     }
 
