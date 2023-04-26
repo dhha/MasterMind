@@ -42,45 +42,63 @@
 
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="3"
             android:gravity="center">
-            <ImageView
-                android:id="@+id/dialog_record_audio_rec_icon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="14dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/icon_record"
-                android:tint="@color/fab_record_red"
-                android:visibility="invisible"
-                android:layout_weight="0.2"/>
-            <ImageView
-                android:id="@+id/dialog_record_audio_play_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="13dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/icon_play"
-                android:tint="@color/gray_800"
-                android:visibility="invisible"
-                android:layout_weight="0.2"
-                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/dialog_record_audio_rec_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_record"
+                    android:tint="@color/fab_record_red"
+                    android:visibility="invisible"
+                    android:layout_weight="0.2"/>
+                <ImageView
+                    android:id="@+id/dialog_record_audio_play_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_play"
+                    android:tint="@color/gray_800"
+                    android:visibility="invisible"
+                    android:layout_weight="0.2"/>
+                <ImageView
+                    android:id="@+id/dialog_record_audio_done_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon_check"
+                    android:tint="@color/fab_accept_green"
+                    android:visibility="invisible"
+                    android:layout_weight="0.2"/>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/dialog_record_audio_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="32dp"
                 android:layout_marginBottom="2dp"
                 android:textColor="@color/gray_700"
                 android:textSize="34sp"

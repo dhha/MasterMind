@@ -28,20 +28,19 @@ private val navArgs:gradeGragmentArgs by navArgs()
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view=  inflater.inflate(R.layout.fragment_grade, container, false)
-        binding= FragmentGradeBinding.bind(view)
-        // Inflate the layout for this fragment
 
+        var view=  inflater.inflate(R.layout.fragment_grade, container, false)
+
+        binding= FragmentGradeBinding.bind(view)
 
         return binding.root
-
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         grades=navArgs.grade
-binding.course.setText(grades?.course)
+        binding.course.setText(grades?.course)
         binding.quizScore.setText(grades?.quizScore)
         binding.assignment.setText(grades?.assignmentScore)
         binding.midScore.setText(grades?.midScore)
@@ -138,7 +137,7 @@ binding.course.setText(grades?.course)
                    GradeDatabase(it).getGradeDao().updateGrade(grad)
                    it.toast("grade updated")
                }
-   val action=gradeGragmentDirections.actionGradeGragmentToNavGrade()
+               val action=gradeGragmentDirections.actionGradeGragmentToNavGrade()
                Navigation.findNavController(view).navigate(action)
 
            }

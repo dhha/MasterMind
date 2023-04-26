@@ -112,6 +112,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/fragment_task_location_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/fragment_task_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:maxLines="2"
+                android:maxLength="70"
+                android:hint="@string/fragment_task_location_hint"
+                android:backgroundTint="@color/gray_700"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -139,6 +161,7 @@
                     android:src="@drawable/icon_calendar"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:tint="@color/gray_700"
                     tools:ignore="UseAppTint" />
 
             </RelativeLayout>
@@ -177,14 +200,178 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/item_attachment_audio_container"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_task_recycler"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:visibility="invisible"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_audio"
+                android:tint="@color/primary_dark"
+                />
+
+            <!--<ImageView-->
+            <!--android:id="@+id/item_attachment_audio_rec"-->
+            <!--android:layout_width="26dp"-->
+            <!--android:layout_height="26dp"-->
+            <!--android:src="@drawable/icon_record"-->
+            <!--android:tint="@color/swipe_refresh_red"-->
+            <!--/>-->
+
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="match_parent">
+
+<!--                <TextView-->
+<!--                    android:id="@+id/item_attachment_audio_tap_to_add"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:hint="@string/item_attachment_audio_hint"-->
+<!--                    android:visibility="visible"-->
+<!--                    />-->
+
+                <LinearLayout
+                    android:id="@+id/item_attachment_audio_player_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    >
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/item_attachment_audio_record"-->
+                    <!--android:layout_width="22dp"-->
+                    <!--android:layout_height="22dp"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:layout_marginLeft="6dp"-->
+                    <!--android:layout_marginStart="6dp"-->
+                    <!--android:src="@drawable/icon_record"-->
+                    <!--android:tint="@color/fab_record_red"-->
+                    <!--/>-->
+                    <ImageView
+                        android:id="@+id/item_attachment_audio_play_pause"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:padding="2dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginStart="6dp"
+                        android:src="@drawable/icon_play"
+                        android:tint="@color/primary"
+                        />
+                    <TextView
+                        android:id="@+id/item_attachment_audio_time_elapsed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginStart="12dp"
+                        android:text="00:00"/>
+                    <SeekBar
+                        android:id="@+id/item_attachment_audio_seek"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/primary"
+
+                        />
+                    <TextView
+                        android:id="@+id/item_attachment_audio_time_remaining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/item_attachment_image_container"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:visibility="invisible">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_camera"
+                android:tint="@color/primary_dark"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/item_attachment_image_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"/>
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/item_attachment_image_tap_to_add_container"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center"-->
+<!--                    android:background="@color/gray_300">-->
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:tint="@color/gray_800"-->
+<!--                        android:src="@drawable/icon_image"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/item_attachment_image_hint"/>-->
+<!--                </LinearLayout>-->
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/item_attachment_link_container"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_link"
+                android:tint="@color/primary_dark"
+                />
+
+            <TextView
+                android:id="@+id/item_attachment_link_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:hint="@string/item_attachment_link_hint"
                 />
         </LinearLayout>
         <LinearLayout
@@ -263,25 +450,25 @@
             app:fab_showShadow="false"
             app:fab_size="mini" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_text_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_text_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fragment_task_add_text_attachment"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/icon_text_fab_mini"-->
+<!--            app:fab_colorNormal="@color/primary"-->
+<!--            app:fab_colorPressed="@color/primary"-->
+<!--            app:fab_showShadow="false"-->
+<!--            app:fab_size="mini" />-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_list_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_list_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fragment_task_add_list_attachment"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/icon_list_fab_mini"-->
+<!--            app:fab_colorNormal="@color/primary"-->
+<!--            app:fab_colorPressed="@color/primary"-->
+<!--            app:fab_showShadow="false"-->
+<!--            app:fab_size="mini" />-->
 
     </com.github.clans.fab.FloatingActionMenu>
     <TextView

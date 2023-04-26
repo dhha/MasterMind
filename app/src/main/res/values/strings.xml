@@ -253,4 +253,6 @@
     <string name="fragment_course_location_label">Location</string>
     <string name="fragment_course_location_hint">Enter location</string>
     <string name="fragment_audio_record">Audio Recording</string>
+    <string name="fragment_task_location_hint">Enter location</string>
+    <string name="fragment_task_location_label">Location</string>
 </resources>
