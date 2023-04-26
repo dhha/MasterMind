@@ -7,8 +7,8 @@ import java.sql.Time
 import java.util.Date
 
 @Entity(tableName = "schedules")
-data class Schedule(var course: String, val name: String, val description: String, val location: String, val date: String, val time: String,
-    var audio: String? = null,val image: String? = null, val file: String? = null) : Serializable {
+data class Schedule(var course: String, var name: String, var description: String, var location: String, var date: String, var time: String,
+                    var audio: String? = null, var image: String? = null, var file: String? = null) : Serializable {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

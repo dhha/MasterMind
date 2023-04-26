@@ -38,4 +38,18 @@ class CreateScheduleViewModel: ViewModel() {
     fun setFile(path: String?) {
         file.value = path
     }
+
+    fun setSchedule(schedule: Schedule?) {
+        if (schedule != null) {
+            course.value = schedule.course
+            title.value = schedule.name
+            description.value = schedule.description
+            location.value = schedule.location
+            date.value = schedule.date
+            time.value = schedule.time
+            audio.value = schedule.audio
+            image.value = Uri.parse(schedule.image)
+            file.value = schedule.file
+        }
+    }
 }

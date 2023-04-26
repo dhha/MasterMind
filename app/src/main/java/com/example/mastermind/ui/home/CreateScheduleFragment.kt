@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class CreateScheduleFragment : Fragment() {
     private val narg : CreateScheduleFragmentArgs by navArgs()
     lateinit var startforResultGalley : ActivityResultLauncher<Intent>
     private lateinit var scheduleViewModel: CreateScheduleViewModel
+    private lateinit var courses: kotlin.collections.List<Course>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +50,38 @@ class CreateScheduleFragment : Fragment() {
         binding = FragmentCreateScheduleBinding.bind(view)
         scheduleViewModel = ViewModelProvider(this).get(CreateScheduleViewModel::class.java)
         scheduleViewModel.setAudioPath(narg.path)
+        scheduleViewModel.setSchedule(narg.schedule)
+
+        scheduleViewModel.course.observe(viewLifecycleOwner) {courseName ->
+            lifecycleScope.launch {
+                context?.let {
+                    val course = MasterMindDatabase(requireContext()).getCourseDao().findCouser(courseName)
+                    if(course != null) {
+                        binding.listCourses.setSelection(courses.indexOf(course))
+                    }
+                }
+            }
+        }
+
+        scheduleViewModel.title.observe(viewLifecycleOwner) {
+            binding.fragmentTaskTitle.setText(it)
+        }
+
+        scheduleViewModel.description.observe(viewLifecycleOwner) {
+            binding.fragmentTaskDescription.setText(it)
+        }
+
+        scheduleViewModel.location.observe(viewLifecycleOwner) {
+            binding.fragmentTaskLocation.setText(it)
+        }
+
+        scheduleViewModel.date.observe(viewLifecycleOwner) {
+            binding.reminderDate.setText(it)
+        }
+
+        scheduleViewModel.time.observe(viewLifecycleOwner) {
+            binding.reminderTime.setText(it)
+        }
 
         scheduleViewModel.audio.observe(viewLifecycleOwner) {
             if(it == null) {
@@ -85,7 +119,7 @@ class CreateScheduleFragment : Fragment() {
         //Loading courses
         lifecycleScope.launch {
             context?.let {
-                val courses = MasterMindDatabase(it).getCourseDao().getAllCourses()
+                courses = MasterMindDatabase(it).getCourseDao().getAllCourses()
                 binding.listCourses.adapter = SpinnerAdapter(it, courses)
             }
         }
@@ -138,8 +172,24 @@ class CreateScheduleFragment : Fragment() {
                     val image = scheduleViewModel.image.value
                     val file = scheduleViewModel.file.value
 
-                    val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
-                    MasterMindDatabase(it).getScheduleDao().addSchedule(schedule)
+                    if(narg.schedule != null) {
+                        var schedule = narg.schedule as Schedule
+                        schedule.course = course.couserName
+                        schedule.name = name
+                        schedule.description = desc
+                        schedule.location = location
+                        schedule.date = scheduleViewModel.date.value.toString()
+                        schedule.time = scheduleViewModel.time.value.toString()
+                        schedule.audio = scheduleViewModel.audio.value
+                        schedule.image = scheduleViewModel.image.value.toString()
+                        schedule.file = scheduleViewModel.file.value
+
+                        MasterMindDatabase(it).getScheduleDao().updateSchedule(schedule)
+                    } else {
+                        val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
+                        MasterMindDatabase(it).getScheduleDao().addSchedule(schedule)
+                    }
+
                 }
             }
             val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToNavSchedule()

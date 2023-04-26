@@ -10,6 +10,7 @@
         android:name="com.example.mastermind.ui.home.HomeFragment"
         android:label="@string/menu_schedule"
         tools:layout="@layout/fragment_home" >
+
         <action
             android:id="@+id/action_nav_schedule_to_createScheduleFragment"
             app:destination="@id/createScheduleFragment" />
@@ -70,6 +71,11 @@
         <action
             android:id="@+id/action_createScheduleFragment_to_nav_schedule2"
             app:destination="@id/nav_schedule" />
+        <argument
+            android:name="schedule"
+            app:argType="com.example.mastermind.ui.model.Schedule"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/createCourseFragment"

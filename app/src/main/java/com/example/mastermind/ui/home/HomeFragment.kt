@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mastermind.databinding.FragmentHomeBinding
 import com.example.mastermind.ui.adapter.ScheduleAdapter
 import com.example.mastermind.ui.model.MasterMindDatabase
+import com.example.mastermind.ui.model.Schedule
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -23,7 +25,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private lateinit var adapter: ScheduleAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,10 +39,27 @@ class HomeFragment : Fragment() {
         //Get all schedule
         lifecycleScope.launch {
             context?.let {
-                var schedules = MasterMindDatabase(it).getScheduleDao().getAllSchedule()
-                val adapter = schedules?.let {
-                    ScheduleAdapter(schedules)
-                }
+                var schedules = MasterMindDatabase(it).getScheduleDao().getAllSchedule() as ArrayList<Schedule>
+                adapter = schedules?.let {
+                    ScheduleAdapter(schedules, onScheduleClick = { schedule ->
+                        val direction = HomeFragmentDirections.actionNavScheduleToCreateScheduleFragment(null).setSchedule(schedule)
+                        findNavController().navigate(direction)
+                    }, onScheduleLongClick = { schedule ->
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Confirm")
+                            .setMessage("Do you want to remove this schedule?")
+                            .setPositiveButton("Remove") {view, id ->
+
+                                adapter.remove(schedule)
+                                lifecycleScope.launch {
+                                    context?.let {
+                                        MasterMindDatabase(requireContext()).getScheduleDao().deleteSchedule(schedule)
+                                    }
+                                }
+                            }
+                            .setNegativeButton("Cancel") { _, _ -> }.show()
+                    })
+                }!!
 
                 binding.listSchedule.layoutManager = LinearLayoutManager(it)
                 binding.listSchedule.adapter = adapter
