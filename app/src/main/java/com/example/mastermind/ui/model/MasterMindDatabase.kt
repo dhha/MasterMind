@@ -7,9 +7,14 @@ import androidx.room.RoomDatabase
 import com.example.mastermind.ui.Grade.Grade
 import com.example.mastermind.ui.Grade.GradeDao
 
-@Database(entities = [Grade::class, Attachment::class, Course::class, Schedule::class], version = 1)
+@Database(
+    entities = [Grade::class, Attachment::class, Course::class, Schedule::class],
+    version = 3
+)
 abstract class MasterMindDatabase: RoomDatabase(){
     abstract fun getGradeDao(): GradeDao
+    abstract fun getCourseDao(): CourseDao
+    abstract fun getScheduleDao(): ScheduleDao
 
     companion object{
         @Volatile
@@ -23,6 +28,6 @@ abstract class MasterMindDatabase: RoomDatabase(){
             }
         }
         private fun buildDatabase(context: Context)= Room.databaseBuilder(context.applicationContext,
-            MasterMindDatabase::class.java, "MasterMindDB").build()
+            MasterMindDatabase::class.java, "MasterMindDB").fallbackToDestructiveMigration().build()
     }
 }

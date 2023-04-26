@@ -112,6 +112,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/fragment_task_location_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/fragment_task_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:maxLines="2"
+                android:maxLength="70"
+                android:hint="@string/fragment_task_location_hint"
+                android:backgroundTint="@color/gray_700"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -139,6 +161,7 @@
                     android:src="@drawable/icon_calendar"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:tint="@color/gray_700"
                     tools:ignore="UseAppTint" />
 
             </RelativeLayout>
