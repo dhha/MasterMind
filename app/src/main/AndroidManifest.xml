@@ -15,12 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterMind"
         tools:targetApi="31">
-        <activity
-            android:name=".myActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateScheduleActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
