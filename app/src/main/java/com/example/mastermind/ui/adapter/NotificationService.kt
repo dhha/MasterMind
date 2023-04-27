@@ -43,8 +43,8 @@ class NotificationService: Service() {
         // Create a notification builder
         val builder = NotificationCompat.Builder(this, "my_channel_id")
             .setSmallIcon(R.drawable.icon_play)
-            .setContentTitle(notification.name)
-            .setContentText(notification.description + " will take place at " + notification.location)
+            .setContentTitle(notification.course)
+            .setContentText(notification.name + " will take place on " +notification.date + " " +notification.time+ " at " + notification.location)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
