@@ -31,6 +31,10 @@ class CreateCourseFragment : Fragment() {
             findNavController().navigate(direction)
         }
         binding.saveCourse.setOnClickListener {
+            if(binding.fragmentCourseName.text.isNullOrEmpty()) {
+                binding.fragmentCourseName.error = "Please enter name"
+                return@setOnClickListener;
+            }
             lifecycleScope.launch {
                 context?.let {
                     val name = binding.fragmentCourseName.text.toString()
