@@ -7,22 +7,37 @@
     tools:context=".gradeGragment">
 
 
-        <EditText
+       <!-- <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:inputType="text"
             android:id="@+id/course"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:textFontWeight="40"
             android:hint="course"
             android:textAppearance="@style/TextAppearance.AppCompat.Large">
-        </EditText>
+        </EditText>-->
+    <Spinner
+        android:id="@+id/course_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:spinnerMode="dropdown"
+        android:entries="@array/courses"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:textFontWeight="40"
+        android:hint="course"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:inputType="number"
             android:id="@+id/quizScore"
-            android:hint="quiz"
+            android:hint="quiz/20%"
             android:textAppearance="@style/TextAppearance.AppCompat.Large">
         </EditText>
         <EditText
@@ -31,7 +46,7 @@
             android:layout_weight="10"
             android:inputType="number"
             android:id="@+id/midScore"
-            android:hint="mid"
+            android:hint="mid/30%"
             android:textAppearance="@style/TextAppearance.AppCompat.Large">
         </EditText>
         <EditText
@@ -40,7 +55,7 @@
             android:layout_height="0dp"
             android:layout_weight="10"
             android:inputType="number"
-            android:hint="assignment"
+            android:hint="assignment/10%"
             android:textAppearance="@style/TextAppearance.AppCompat.Large">
         </EditText>
 
@@ -49,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:hint="final"
+            android:hint="final/40%"
             android:inputType="number"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="20dp"
@@ -61,29 +76,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="10">
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="50"
                 android:id="@+id/save"
-                android:text="submit"
+               android:src="@drawable/baseline_save_24"
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 android:onClick="saving"
-                android:layout_alignParentTop="true">
-            </Button>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"/>
+
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_weight="50"
                 android:id="@+id/reset"
-                android:text="Reset"
+                android:src="@drawable/baseline_lock_reset_24"
                 android:textAllCaps="false"
                 android:onClick="resetting"
                 android:textSize="20sp"
-                android:layout_alignParentTop="true">
-            </Button>
-            <Button
+                android:layout_alignParentTop="true"/>
+
+
+            <!--<Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
@@ -93,13 +110,26 @@
                 android:onClick="deleting"
                 android:textSize="20sp"
                 android:layout_alignParentTop="true">
-            </Button>
+            </Button>-->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="50"
+                android:id="@+id/delete"
+                android:src="@drawable/baseline_delete_forever_24"
+                android:textAllCaps="false"
+                android:onClick="deleting"
+                android:textSize="20sp"
+                android:layout_alignParentTop="true"/>
 
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:textFontWeight="40"
             android:id="@+id/score"/>
 
     </LinearLayout>

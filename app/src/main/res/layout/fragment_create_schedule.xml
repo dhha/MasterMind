@@ -117,7 +117,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/fragment_task_location_label"
+              
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -128,7 +128,7 @@
                 android:imeOptions="actionDone"
                 android:maxLines="2"
                 android:maxLength="70"
-                android:hint="@string/fragment_task_location_hint"
+
                 android:backgroundTint="@color/gray_700"
                 />
         </LinearLayout>
@@ -219,7 +219,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/icon_audio"
-                android:tint="@color/primary_dark"
+
                 />
 
             <!--<ImageView-->
@@ -272,7 +272,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_marginStart="6dp"
                         android:src="@drawable/icon_play"
-                        android:tint="@color/primary"
+
                         />
                     <TextView
                         android:id="@+id/item_attachment_audio_time_elapsed"
@@ -313,7 +313,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/icon_camera"
-                android:tint="@color/primary_dark"
+
                 />
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -400,77 +400,7 @@
         </LinearLayout>
     </LinearLayout>
     </ScrollView>
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fragment_task_add_attachment"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/fab_margin"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:menu_animationDelayPerItem="30"
-        app:menu_backgroundColor="@android:color/transparent"
-        app:menu_buttonSpacing="6dp"
-        app:menu_colorNormal="@color/primary"
-        app:menu_colorPressed="@color/primary"
-        app:menu_fab_size="normal"
-        app:menu_icon="@drawable/icon_attachment"
-        app:menu_showShadow="false">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_audio_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_audio_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_image_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_image_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fragment_task_add_link_attachment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_link_fab_mini"
-            app:fab_colorNormal="@color/primary"
-            app:fab_colorPressed="@color/primary"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-
-<!--        <com.github.clans.fab.FloatingActionButton-->
-<!--            android:id="@+id/fragment_task_add_text_attachment"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/icon_text_fab_mini"-->
-<!--            app:fab_colorNormal="@color/primary"-->
-<!--            app:fab_colorPressed="@color/primary"-->
-<!--            app:fab_showShadow="false"-->
-<!--            app:fab_size="mini" />-->
-
-<!--        <com.github.clans.fab.FloatingActionButton-->
-<!--            android:id="@+id/fragment_task_add_list_attachment"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/icon_list_fab_mini"-->
-<!--            app:fab_colorNormal="@color/primary"-->
-<!--            app:fab_colorPressed="@color/primary"-->
-<!--            app:fab_showShadow="false"-->
-<!--            app:fab_size="mini" />-->
-
-    </com.github.clans.fab.FloatingActionMenu>
     <TextView
         android:id="@+id/fragment_task_add_attachment_hint"
         android:layout_width="wrap_content"

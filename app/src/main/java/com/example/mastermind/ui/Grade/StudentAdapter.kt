@@ -1,62 +1,60 @@
 package com.example.mastermind.ui.Grade
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mastermind.R
 
-class StudentAdapter(var students:List<Grade>):RecyclerView.Adapter<StudentAdapter.studentViewHolder>() {
+import com.example.mastermind.ui.model.MasterMindDatabase
 
-    @SuppressLint("SuspiciousIndentation")
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): StudentAdapter.studentViewHolder {
+class StudentAdapter(private var students: List<Grade>) :
+    RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+    private lateinit var database: MasterMindDatabase
 
-    var view =LayoutInflater.from(parent.context).inflate(R.layout.student_layout, parent, false)
-
-        return studentViewHolder(view)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.student_layout, parent, false)
+        return StudentViewHolder(view)
     }
 
-    @SuppressLint("SuspiciousIndentation")
-    override fun onBindViewHolder(holder: StudentAdapter.studentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
+        val student = students[position]
 
-        holder.course.setText("Course: ${students[position].course}")
-        holder.quizScore.setText("Quiz: ${students[position].quizScore.toString()}")
-        holder.assignment.setText("Assignment: ${students[position].assignmentScore.toString()}")
-        holder.midScore.setText("Mid Exam: ${students[position].midScore.toString()}")
-        holder.finalScore.setText("Final Exam: ${students[position].finalScore.toString()}")
+        holder.course.text = "Course: ${student.course}"
+        holder.quizScore.text = "Quiz: ${student.quizScore}"
+        holder.assignment.text = "Assignment: ${student.assignmentScore}"
+        holder.midScore.text = "Mid Exam: ${student.midScore}"
+        holder.finalScore.text = "Final Exam: ${student.finalScore}"
+        holder.score.text = "Your Final grade is: ${student.calculatedGrade}"
 
-  holder.score.text= "Your Final  grade is: ${students[position].calculatedGrade}"
-
-        holder.itemView.setOnClickListener {
-   var action= FragmentGradeCaculatorDirections.actionNavScheduleToGradeGragment()
-           action.grade=students[position]
+        holder.editButton.setOnClickListener {
+            val action = FragmentGradeCaculatorDirections.actionNavScheduleToGradeGragment()
+            action.grade = student
             Navigation.findNavController(it).navigate(action)
         }
-
     }
 
     override fun getItemCount(): Int {
-       return students.size
+        return students.size
     }
 
- class studentViewHolder(view: View):RecyclerView.ViewHolder(view){
+    inner class StudentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val course: TextView = view.findViewById(R.id.course)
+        val quizScore: TextView = view.findViewById(R.id.quizScore)
+        val midScore: TextView = view.findViewById(R.id.midScore)
+        val assignment: TextView = view.findViewById(R.id.assignment)
+        val finalScore: TextView = view.findViewById(R.id.finalScore)
+        val score: TextView = view.findViewById(R.id.score)
+        val editButton: ImageButton = view.findViewById(R.id.edit)
+    }
 
-
-    var course:EditText=view.findViewById(R.id.course)
-    var quizScore:EditText=view.findViewById(R.id.quizScore)
-    var midScore:EditText=view.findViewById(R.id.midScore)
-    var assignment:EditText=view.findViewById(R.id.assignment)
-    var finalScore:EditText=view.findViewById<EditText>(R.id.finalScore)
-    var score:TextView=view.findViewById(R.id.score)
-
+    fun updateList(newList: List<Grade>) {
+        students = newList
+        notifyDataSetChanged()
+    }
 }
-}
+
+
+

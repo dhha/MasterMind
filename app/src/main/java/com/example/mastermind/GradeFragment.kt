@@ -1,81 +1,70 @@
 package com.example.mastermind
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.mastermind.databinding.FragmentGradeBinding
 import com.example.mastermind.ui.Grade.BaseFragment
 import com.example.mastermind.ui.Grade.Grade
-import com.example.mastermind.ui.Grade.GradeDatabase
 import com.example.mastermind.ui.Grade.toast
+import com.example.mastermind.ui.model.MasterMindDatabase
 import kotlinx.coroutines.launch
 
 
 class gradeGragment : BaseFragment() {
 private lateinit var binding: FragmentGradeBinding
 private var grades:Grade?=null
+    private lateinit var values: Array<String>
 private val navArgs:gradeGragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         var view=  inflater.inflate(R.layout.fragment_grade, container, false)
-
         binding= FragmentGradeBinding.bind(view)
+        // Inflate the layout for this fragment
 
         return binding.root
 
     }
-
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+        values = resources.getStringArray(R.array.courses)
+
+        var adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, values)
+     binding.courseSpinner.adapter=adapter
+        values = resources.getStringArray(R.array.courses)
+
+        binding.courseSpinner.adapter = adapter
         grades=navArgs.grade
-        binding.course.setText(grades?.course)
+        binding.courseSpinner.setSelection(values.indexOf(grades?.course))
         binding.quizScore.setText(grades?.quizScore)
         binding.assignment.setText(grades?.assignmentScore)
         binding.midScore.setText(grades?.midScore)
         binding.finalScore.setText(grades?.finalScore)
         binding.score.text = grades?.calculatedGrade
 
-
-
-
-
-
-
         binding.save.setOnClickListener {view->
-            var course = binding.course.text.toString()
+            //var spinner = binding.course.text.toString()
+            var spinner = binding.courseSpinner.selectedItem.toString()
             var quiz = binding.quizScore.text.toString()
             var assignment = binding.assignment.text.toString()
             var mid = binding.midScore.text.toString()
             var final = binding.finalScore.text.toString()
-//            var finalGrade=binding.score.text.toString()
-            var totalScore = quiz.toInt() + assignment.toInt() + mid.toInt() + final.toInt()
 
-            val grade = when (totalScore) {
 
-                in 0..59 -> "F"
-                in 60..69 -> "D"
-                in 70..79 -> "C"
-                in 80..89 -> "B"
-                in 90..100 -> "A"
-                else -> "Invalid score"
-            }
-            binding.score.text= "The grade for the $course is : $grade"
-
-            if(course.isEmpty()){
-                binding.course.error = "course Required"
-                binding.course.requestFocus()
+            /*if(spinner.isEmpty()){
+                // binding.courseSpinner.error = "course Required"
+                Toast.makeText(requireContext(), "Course Required", Toast.LENGTH_SHORT).show()
+                binding.courseSpinner.requestFocus()
                 return@setOnClickListener // stop further execution ie returning at the end of the setOnClickListener
             }
             if(quiz.isEmpty()){
@@ -97,44 +86,41 @@ private val navArgs:gradeGragmentArgs by navArgs()
                 binding.finalScore.error = "finalScore Required"
                 binding.finalScore.requestFocus()
                 return@setOnClickListener // stop further execution ie returning at the end of the setOnClickListener
+            }*/
+
+             //shorter way
+           if (!validateInput(quiz, binding.quizScore, "Quiz score Required")) return@setOnClickListener
+           if (!validateInput(assignment, binding.assignment, "Assignment Required")) return@setOnClickListener
+           if (!validateInput(mid, binding.midScore, "Mid score Required")) return@setOnClickListener
+           if (!validateInput(final, binding.finalScore, "Final score Required")) return@setOnClickListener
+            var totalScore = ((quiz.toInt())*0.2 + (assignment.toInt())*0.1 +( mid.toInt())*0.3 + (final.toInt())*0.4)
+            val grade = when (totalScore) {
+
+                in 0.01..59.99 -> "F"
+                in 60.01..69.99 -> "D"
+                in 70.01..79.99 -> "C"
+                in 80.01..89.99 -> "B"
+                in 90.01..100.0 -> "A"
+                else -> "Invalid score"
             }
-           /* //shorter way
-            if (!validateInput(course, binding.course, "Course Required")) return@setOnClickListener
-            if (!validateInput(quiz, binding.quizScore, "Quiz score Required")) return@setOnClickListener
-            if (!validateInput(assignment, binding.assignment, "Assignment Required")) return@setOnClickListener
-            if (!validateInput(mid, binding.midScore, "Mid score Required")) return@setOnClickListener
-            if (!validateInput(final, binding.finalScore, "Final score Required")) return@setOnClickListener*/
+            binding.score.text= "The grade for the $spinner is : $grade"
+
+
+
 
             launch {
-/*
-*  context?.let {
-                    val mNote = Note(noteTitle, noteBody)
-                    // note == null means Inserting a new Note
-                    if (note == null) {
-                        NoteDatabase(it).getNoteDao().addNote(mNote)
-                        it.toast("Note Saved")
-                    } else {
-                        // Update the note
-                        mNote.id = note!!.id
-                        //   mNote.title = noteTitle
-                        NoteDatabase(it).getNoteDao().updateNote(mNote)
-                        it.toast("Note Updated")
-                    }
-                    // Automatically after adding a note need to return to Home_Fragment as per the navigation directions
-                    val action = AddNoteFragmentDirections.actionSaveNote()
-                    Navigation.findNavController(view).navigate(action)
-                }*/
+
            context?.let {
-               var grad=Grade(course,quiz,mid,assignment,final,grade)
+               var grad=Grade(spinner,quiz,mid,assignment,final,grade)
 
                if(grades==null){
-                   GradeDatabase(it).getGradeDao().addGrade(grad)
-//                   Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
+                   MasterMindDatabase(it).getGradeDao().addGrade(grad)
+//        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
                    it.toast("grade saved")
                }
                else{
                    grad.id=grades!!.id
-                   GradeDatabase(it).getGradeDao().updateGrade(grad)
+                   MasterMindDatabase(it).getGradeDao().updateGrade(grad)
                    it.toast("grade updated")
                }
                val action=gradeGragmentDirections.actionGradeGragmentToNavGrade()
@@ -143,12 +129,9 @@ private val navArgs:gradeGragmentArgs by navArgs()
            }
 
             }
-
-
-
         }
         binding.reset.setOnClickListener {
-            binding.course.setText("")
+           // binding.courseSpinner.setText("")
             binding.quizScore.setText("")
             binding.assignment.setText("")
             binding.midScore.setText("")
@@ -165,8 +148,7 @@ private val navArgs:gradeGragmentArgs by navArgs()
             setMessage("You cannot undo this operation")
             setPositiveButton("Yes") {dialog, which ->
                 launch {
-                    GradeDatabase(context).getGradeDao().deleteGrade(grades!!)
-                    //val action = AddNoteFragmentDirections.actionSaveNote()
+                    MasterMindDatabase(context).getGradeDao().deleteGrade(grades!!)
                     val action=gradeGragmentDirections.actionGradeGragmentToNavGrade()
                     Navigation.findNavController(requireView()).navigate(action)
                 }

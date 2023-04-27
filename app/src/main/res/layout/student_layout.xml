@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,98 +7,80 @@
     tools:context=".ui.Grade.FragmentGradeCaculator">
 
 
-
-   <!-- <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:inputType="text"
-        android:id="@+id/fullName"
-        android:hint="full name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large">
-    </EditText>-->
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:inputType="text"
         android:id="@+id/course"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:textFontWeight="40"
         android:hint="course"
         android:textAppearance="@style/TextAppearance.AppCompat.Large">
-    </EditText>
-    <EditText
+    </TextView>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:inputType="text"
         android:id="@+id/quizScore"
-        android:hint="quiz"
+        android:hint="quiz/20%"
         android:textAppearance="@style/TextAppearance.AppCompat.Large">
-    </EditText>
-    <EditText
+    </TextView>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:inputType="text"
         android:id="@+id/midScore"
-        android:hint="mid"
+        android:hint="mid/30% "
         android:textAppearance="@style/TextAppearance.AppCompat.Large">
-    </EditText>
-    <EditText
+    </TextView>
+    <TextView
         android:id="@+id/assignment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="15"
         android:inputType="text"
-        android:hint="assignment"
+        android:hint="assignment/10%"
         android:textAppearance="@style/TextAppearance.AppCompat.Large">
-    </EditText>
+    </TextView>
 
-    <EditText
+    <TextView
         android:id="@+id/finalScore"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:hint="final"
+        android:layout_weight="15"
+        android:hint="final/40%"
         android:inputType="textMultiLine"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_marginTop="20dp"
         android:gravity="top"/>
 
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="10">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:id="@+id/save"
-            android:text="calculate"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true">
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:id="@+id/reset"
-            android:text="Reset"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true">
-        </Button>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="20"
+       android:orientation="horizontal">
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_weight="60"
+           android:textStyle="bold"
+           android:textSize="40dp"
+           android:textFontWeight="40"
+           android:id="@+id/score"/>
+          <ImageButton
+              android:id="@+id/edit"
+              android:src="@drawable/baseline_edit_note_24"
+              android:layout_width="100dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="20"
 
-    </LinearLayout>-->
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:textStyle="bold"
-        android:id="@+id/score"/>
-
+              />
+   </LinearLayout>
 
 </LinearLayout>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="courses">
+        <item>MWA</item>
+        <item>Algorithm</item>
+        <item>WAP</item>
+        <item>WAA</item>
+        <item>MDP</item>
+        <item>FPP</item>
+        <item>MPP</item>
+    </string-array>
+</resources>

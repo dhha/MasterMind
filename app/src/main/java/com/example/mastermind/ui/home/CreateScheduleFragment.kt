@@ -95,30 +95,30 @@ class CreateScheduleFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
-        binding.fragmentTaskAddAudioAttachment.setOnClickListener {
-            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToAudioRecordFragment()
-            findNavController().navigate(direction)
-        }
-
-        binding.fragmentTaskAddImageAttachment.setOnClickListener {
-            val i = Intent()
-            // Activity Action for the intent : Pick an item from the data, returning what was selected.
-            i.action = Intent.ACTION_PICK
-            i.type = "image/*"
-            startforResultGalley.launch(i)
-        }
-
-        binding.fragmentTaskAddLinkAttachment.setOnClickListener {
-            var txName = EditText(requireContext())
-            txName.setHint("Https://")
-            AlertDialog.Builder(requireContext())
-                .setTitle("Add file attachemnt")
-                .setView(txName)
-                .setPositiveButton("Add") {view, id ->
-                    scheduleViewModel.setFile("https://" + txName.text.toString())
-                }
-                .setNegativeButton("Cancel") { _, _ -> }.show()
-        }
+//        binding.fragmentTaskAddAudioAttachment.setOnClickListener {
+//            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToAudioRecordFragment()
+//            findNavController().navigate(direction)
+//        }
+//
+//        binding.fragmentTaskAddImageAttachment.setOnClickListener {
+//            val i = Intent()
+//            // Activity Action for the intent : Pick an item from the data, returning what was selected.
+//            i.action = Intent.ACTION_PICK
+//            i.type = "image/*"
+//            startforResultGalley.launch(i)
+//        }
+//
+//        binding.fragmentTaskAddLinkAttachment.setOnClickListener {
+//            var txName = EditText(requireContext())
+//            txName.setHint("Https://")
+//            AlertDialog.Builder(requireContext())
+//                .setTitle("Add file attachemnt")
+//                .setView(txName)
+//                .setPositiveButton("Add") {view, id ->
+//                    scheduleViewModel.setFile("https://" + txName.text.toString())
+//                }
+//                .setNegativeButton("Cancel") { _, _ -> }.show()
+//        }
 
         binding.cancelSchedule.setOnClickListener {
             val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToNavSchedule()
