@@ -1,11 +1,10 @@
 package com.example.mastermind
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mastermind.data.Course
 import com.example.mastermind.databinding.CourseListBinding
-import com.example.mastermind.ui.model.Course
 
 class CourseListAdapter(private val courseDataSet : List<Course>) : RecyclerView.Adapter<CourseListAdapter.MyViewHolder>(){
     override fun onCreateViewHolder(
@@ -21,8 +20,8 @@ class CourseListAdapter(private val courseDataSet : List<Course>) : RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val currentCourse = courseDataSet[position]
-        holder.binding.tvCourseName.text = currentCourse.couserName
-        holder.binding.tvCourseDescription.text = currentCourse.description
+        holder.binding.tvCourseName.text = currentCourse.courseName
+        holder.binding.tvCourseDescription.text = currentCourse.courseDescription
     }
 
     override fun getItemCount() = courseDataSet.size
