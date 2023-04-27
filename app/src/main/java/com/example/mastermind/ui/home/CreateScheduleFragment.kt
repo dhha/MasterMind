@@ -2,9 +2,13 @@ package com.example.mastermind.ui.home
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,11 +38,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CreateScheduleFragment : Fragment() {
+class CreateScheduleFragment : Fragment(), AudioRecordFragment.audioDialogListener {
     private lateinit var binding: FragmentCreateScheduleBinding
     private val narg : CreateScheduleFragmentArgs by navArgs()
     lateinit var startforResultGalley : ActivityResultLauncher<Intent>
     private lateinit var scheduleViewModel: CreateScheduleViewModel
+    private var courses: kotlin.collections.List<Course>? = null
+    private var schedule: Schedule? = null
+    private var isPlaying = false
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +56,38 @@ class CreateScheduleFragment : Fragment() {
         binding = FragmentCreateScheduleBinding.bind(view)
         scheduleViewModel = ViewModelProvider(this).get(CreateScheduleViewModel::class.java)
         scheduleViewModel.setAudioPath(narg.path)
+        scheduleViewModel.setSchedule(narg.schedule)
+
+        scheduleViewModel.course.observe(viewLifecycleOwner) {courseName ->
+            lifecycleScope.launch {
+                context?.let {
+                    val course = MasterMindDatabase(requireContext()).getCourseDao().findCouser(courseName)
+                    if(course != null && courses != null && courses?.indexOf(course)!! >= 0) {
+                        binding.listCourses.setSelection(courses!!.indexOf(course))
+                    }
+                }
+            }
+        }
+
+        scheduleViewModel.title.observe(viewLifecycleOwner) {
+            binding.fragmentTaskTitle.setText(it)
+        }
+
+        scheduleViewModel.description.observe(viewLifecycleOwner) {
+            binding.fragmentTaskDescription.setText(it)
+        }
+
+        scheduleViewModel.location.observe(viewLifecycleOwner) {
+            binding.fragmentTaskLocation.setText(it)
+        }
+
+        scheduleViewModel.date.observe(viewLifecycleOwner) {
+            binding.reminderDate.setText(it)
+        }
+
+        scheduleViewModel.time.observe(viewLifecycleOwner) {
+            binding.reminderTime.setText(it)
+        }
 
         scheduleViewModel.audio.observe(viewLifecycleOwner) {
             if(it == null) {
@@ -58,7 +98,7 @@ class CreateScheduleFragment : Fragment() {
         }
 
         scheduleViewModel.image.observe(viewLifecycleOwner) {
-            if(it == null) {
+            if(it.toString().equals("null")) {
                 binding.itemAttachmentImageContainer.visibility = View.INVISIBLE
             } else {
                 binding.itemAttachmentImageContainer.visibility = View.VISIBLE
@@ -85,8 +125,8 @@ class CreateScheduleFragment : Fragment() {
         //Loading courses
         lifecycleScope.launch {
             context?.let {
-                val courses = MasterMindDatabase(it).getCourseDao().getAllCourses()
-                binding.listCourses.adapter = SpinnerAdapter(it, courses)
+                courses = MasterMindDatabase(it).getCourseDao().getAllCourses()
+                binding.listCourses.adapter = SpinnerAdapter(it, courses!!)
             }
         }
 
@@ -95,30 +135,31 @@ class CreateScheduleFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
-//        binding.fragmentTaskAddAudioAttachment.setOnClickListener {
-//            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToAudioRecordFragment()
-//            findNavController().navigate(direction)
-//        }
-//
-//        binding.fragmentTaskAddImageAttachment.setOnClickListener {
-//            val i = Intent()
-//            // Activity Action for the intent : Pick an item from the data, returning what was selected.
-//            i.action = Intent.ACTION_PICK
-//            i.type = "image/*"
-//            startforResultGalley.launch(i)
-//        }
-//
-//        binding.fragmentTaskAddLinkAttachment.setOnClickListener {
-//            var txName = EditText(requireContext())
-//            txName.setHint("Https://")
-//            AlertDialog.Builder(requireContext())
-//                .setTitle("Add file attachemnt")
-//                .setView(txName)
-//                .setPositiveButton("Add") {view, id ->
-//                    scheduleViewModel.setFile("https://" + txName.text.toString())
-//                }
-//                .setNegativeButton("Cancel") { _, _ -> }.show()
-//        }
+        binding.fragmentTaskAddAudioAttachment.setOnClickListener {
+            val audioDialog = AudioRecordFragment()
+            audioDialog.setDataPassListener(this)
+            audioDialog.show(requireFragmentManager(), "AudioDialog")
+        }
+
+        binding.fragmentTaskAddImageAttachment.setOnClickListener {
+            val i = Intent()
+            // Activity Action for the intent : Pick an item from the data, returning what was selected.
+            i.action = Intent.ACTION_PICK
+            i.type = "image/*"
+            startforResultGalley.launch(i)
+        }
+
+        binding.fragmentTaskAddLinkAttachment.setOnClickListener {
+            var txName = EditText(requireContext())
+            txName.setHint("Https://")
+            AlertDialog.Builder(requireContext())
+                .setTitle("Add file attachemnt")
+                .setView(txName)
+                .setPositiveButton("Add") {view, id ->
+                    scheduleViewModel.setFile("https://" + txName.text.toString())
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
 
         binding.cancelSchedule.setOnClickListener {
             val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToNavSchedule()
@@ -126,6 +167,10 @@ class CreateScheduleFragment : Fragment() {
         }
 
         binding.saveSchedule.setOnClickListener {
+            if(binding.listCourses.selectedItem == null) {
+                Toast.makeText(requireContext(), "Please create new course", Toast.LENGTH_LONG).show()
+                return@setOnClickListener;
+            }
             lifecycleScope.launch {
                 context?.let {
                     val course = binding.listCourses.selectedItem as Course
@@ -138,12 +183,27 @@ class CreateScheduleFragment : Fragment() {
                     val image = scheduleViewModel.image.value
                     val file = scheduleViewModel.file.value
 
-                    val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
-                    MasterMindDatabase(it).getScheduleDao().addSchedule(schedule)
+                    if(narg.schedule != null) {
+                        var _schedule = narg.schedule as Schedule
+                        _schedule.course = course.couserName
+                        _schedule.name = name
+                        _schedule.description = desc
+                        _schedule.location = location
+                        _schedule.date = scheduleViewModel.date.value.toString()
+                        _schedule.time = scheduleViewModel.time.value.toString()
+                        _schedule.audio = scheduleViewModel.audio.value
+                        _schedule.image = scheduleViewModel.image.value.toString()
+                        _schedule.file = scheduleViewModel.file.value
+
+                        MasterMindDatabase(it).getScheduleDao().updateSchedule(_schedule)
+                    } else {
+                        schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
+                        MasterMindDatabase(it).getScheduleDao().addSchedule(schedule!!)
+                    }
+
                 }
             }
-            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToNavSchedule()
-            findNavController().navigate(direction)
+            findNavController().navigate(R.id.action_createScheduleFragment_to_nav_schedule)
         }
 
         binding.datePicker.setOnClickListener {
@@ -174,7 +234,77 @@ class CreateScheduleFragment : Fragment() {
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE), false).show()
         }
+
+        binding.itemAttachmentAudio.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this audio?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeAudioPath()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentImage.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this image?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeImage()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentLink.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this link?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeLink()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentAudioPlayPause.setOnClickListener {
+            if(isPlaying) {
+                isPlaying = false
+                binding.itemAttachmentAudioPlayPause.setImageResource(R.drawable.icon_play)
+                mediaPlayer?.stop()
+            } else {
+                binding.itemAttachmentAudioPlayPause.setImageResource(R.drawable.icon_pause)
+                isPlaying = true
+                mediaPlayer = MediaPlayer()
+                // Set the data source of the MediaPlayer
+                mediaPlayer.setDataSource(requireContext(), Uri.parse(scheduleViewModel.audio.value.toString()))
+                mediaPlayer.prepareAsync()
+                mediaPlayer?.setOnPreparedListener {
+                    mediaPlayer?.start()
+                }
+            }
+        }
+
         return binding.root
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val course = binding.listCourses.selectedItem as Course
+        val name = binding.fragmentTaskTitle.text.toString()
+        val desc = binding.fragmentTaskDescription.text.toString()
+        val location = binding.fragmentTaskLocation.text.toString()
+        val date = binding.reminderDate.text.toString()
+        val time = binding.reminderTime.text.toString()
+        val audio = narg.path
+        val image = scheduleViewModel.image.value
+        val file = scheduleViewModel.file.value
+        val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
+        outState.putSerializable("state_schedule", schedule)
+        super.onSaveInstanceState(outState)
+
+    }
+
+    override fun onAudioDialogPositiveClick(data: String) {
+        scheduleViewModel.setAudioPath(data)
+    }
+
 
 }

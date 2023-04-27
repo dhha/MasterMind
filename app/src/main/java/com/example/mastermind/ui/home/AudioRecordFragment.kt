@@ -1,16 +1,14 @@
 package com.example.mastermind.ui.home
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +16,18 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mastermind.R
 import com.example.mastermind.databinding.FragmentAudioRecordBinding
-import java.io.File
-import java.io.FileInputStream
 
 /**
  * A simple [Fragment] subclass.
  * Use the [AudioRecordFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AudioRecordFragment : Fragment() {
+class AudioRecordFragment : DialogFragment() {
     private lateinit var binding: FragmentAudioRecordBinding
     private lateinit var permissionLauncher : ActivityResultLauncher<Array<String>>
     private var isRecordPermissionGranted = false
@@ -39,6 +37,19 @@ class AudioRecordFragment : Fragment() {
     var audioFilePath: String? = null
     var isRecording = false
     var isPlaying = false
+    private lateinit var listener: audioDialogListener
+    fun setDataPassListener(abc: audioDialogListener) {
+        listener = abc
+    }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        try {
+//            listener = context as audioDialogListener
+//        } catch (e: ClassCastException) {
+//            throw ClassCastException("$context must implement audioDialogListener")
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,8 +99,8 @@ class AudioRecordFragment : Fragment() {
         }
 
         binding.dialogRecordAudioDoneIcon.setOnClickListener {
-            val direction = AudioRecordFragmentDirections.actionAudioRecordFragmentToCreateScheduleFragment(audioFilePath)
-            findNavController().navigate(direction)
+            audioFilePath?.let { it1 -> listener.onAudioDialogPositiveClick(it1) }
+            dismiss()
         }
 
         return binding.root
@@ -213,4 +224,7 @@ class AudioRecordFragment : Fragment() {
         }
     }
 
+    interface audioDialogListener {
+        fun onAudioDialogPositiveClick(data: String)
+    }
 }

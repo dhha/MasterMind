@@ -12,4 +12,6 @@ interface CourseDao {
     suspend fun deleteCourse(course: Course)
     @Update
     suspend fun updateCourse(course: Course)
+    @Query("Select * from Courses where couserName = :it")
+    suspend fun findCouser(it: String?): Course
 }

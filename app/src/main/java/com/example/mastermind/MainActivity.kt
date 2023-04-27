@@ -1,5 +1,9 @@
 package com.example.mastermind
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
@@ -13,7 +17,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.mastermind.databinding.ActivityMainBinding
+import com.example.mastermind.ui.adapter.NotificationService
+import com.example.mastermind.ui.home.AudioRecordFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +48,22 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        //Start service notificaiton
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "My Channel"
+            val descriptionText = "My channel description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("my_channel_id", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val intent = Intent(this, NotificationService::class.java)
+        startService(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

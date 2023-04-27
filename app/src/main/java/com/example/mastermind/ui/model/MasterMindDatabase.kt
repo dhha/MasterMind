@@ -9,7 +9,7 @@ import com.example.mastermind.ui.Grade.GradeDao
 
 @Database(
     entities = [Grade::class, Attachment::class, Course::class, Schedule::class, Notes::class],
-    version = 5
+    version = 6
 )
 abstract class MasterMindDatabase: RoomDatabase(){
     abstract fun getGradeDao(): GradeDao
