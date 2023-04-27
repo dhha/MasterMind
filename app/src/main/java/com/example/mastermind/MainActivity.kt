@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mastermind.databinding.ActivityMainBinding
+import com.example.mastermind.ui.home.AudioRecordFragment
 
 class MainActivity : AppCompatActivity() {
 

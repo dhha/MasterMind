@@ -45,7 +45,7 @@ class ScheduleAdapter(
             if(schedule.audio != null) {
                 itemTaskProgrammedOneTimeAttachmentAudio.setColorFilter(R.color.icons_enabled)
             }
-            if(schedule.image.isNullOrEmpty() === false) {
+            if(!schedule.image.toString().equals("null")) {
                 itemTaskProgrammedOneTimeAttachmentImage.setColorFilter(R.color.icons_enabled)
             }
             if(schedule.file != null) {

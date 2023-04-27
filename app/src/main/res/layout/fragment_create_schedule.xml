@@ -212,6 +212,7 @@
             >
 
             <ImageView
+                android:id="@+id/item_attachment_audio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
@@ -219,8 +220,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/icon_audio"
-                android:tint="@color/primary_dark"
-                />
+                android:tint="@color/primary_dark"/>
 
             <!--<ImageView-->
             <!--android:id="@+id/item_attachment_audio_rec"-->
@@ -306,6 +306,7 @@
             android:gravity="center_vertical"
             android:visibility="invisible">
             <ImageView
+                android:id="@+id/item_attachment_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
@@ -356,6 +357,7 @@
             android:visibility="invisible">
 
             <ImageView
+                android:id="@+id/item_attachment_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"

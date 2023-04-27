@@ -52,4 +52,16 @@ class CreateScheduleViewModel: ViewModel() {
             file.value = schedule.file
         }
     }
+
+    fun removeAudioPath() {
+        audio.value = null
+    }
+
+    fun removeImage() {
+        image.value = null
+    }
+
+    fun removeLink() {
+        file.value = null
+    }
 }

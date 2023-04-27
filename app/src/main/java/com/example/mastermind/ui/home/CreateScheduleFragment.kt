@@ -2,6 +2,7 @@ package com.example.mastermind.ui.home
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -35,12 +36,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CreateScheduleFragment : Fragment() {
+class CreateScheduleFragment : Fragment(), AudioRecordFragment.audioDialogListener {
     private lateinit var binding: FragmentCreateScheduleBinding
     private val narg : CreateScheduleFragmentArgs by navArgs()
     lateinit var startforResultGalley : ActivityResultLauncher<Intent>
     private lateinit var scheduleViewModel: CreateScheduleViewModel
     private var courses: kotlin.collections.List<Course>? = null
+    private var schedule: Schedule? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,7 +94,7 @@ class CreateScheduleFragment : Fragment() {
         }
 
         scheduleViewModel.image.observe(viewLifecycleOwner) {
-            if(it == null) {
+            if(it.toString().equals("null")) {
                 binding.itemAttachmentImageContainer.visibility = View.INVISIBLE
             } else {
                 binding.itemAttachmentImageContainer.visibility = View.VISIBLE
@@ -130,8 +132,9 @@ class CreateScheduleFragment : Fragment() {
         }
 
         binding.fragmentTaskAddAudioAttachment.setOnClickListener {
-            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToAudioRecordFragment()
-            findNavController().navigate(direction)
+            val audioDialog = AudioRecordFragment()
+            audioDialog.setDataPassListener(this)
+            audioDialog.show(requireFragmentManager(), "AudioDialog")
         }
 
         binding.fragmentTaskAddImageAttachment.setOnClickListener {
@@ -173,27 +176,26 @@ class CreateScheduleFragment : Fragment() {
                     val file = scheduleViewModel.file.value
 
                     if(narg.schedule != null) {
-                        var schedule = narg.schedule as Schedule
-                        schedule.course = course.couserName
-                        schedule.name = name
-                        schedule.description = desc
-                        schedule.location = location
-                        schedule.date = scheduleViewModel.date.value.toString()
-                        schedule.time = scheduleViewModel.time.value.toString()
-                        schedule.audio = scheduleViewModel.audio.value
-                        schedule.image = scheduleViewModel.image.value.toString()
-                        schedule.file = scheduleViewModel.file.value
+                        var _schedule = narg.schedule as Schedule
+                        _schedule.course = course.couserName
+                        _schedule.name = name
+                        _schedule.description = desc
+                        _schedule.location = location
+                        _schedule.date = scheduleViewModel.date.value.toString()
+                        _schedule.time = scheduleViewModel.time.value.toString()
+                        _schedule.audio = scheduleViewModel.audio.value
+                        _schedule.image = scheduleViewModel.image.value.toString()
+                        _schedule.file = scheduleViewModel.file.value
 
-                        MasterMindDatabase(it).getScheduleDao().updateSchedule(schedule)
+                        MasterMindDatabase(it).getScheduleDao().updateSchedule(_schedule)
                     } else {
-                        val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
-                        MasterMindDatabase(it).getScheduleDao().addSchedule(schedule)
+                        schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
+                        MasterMindDatabase(it).getScheduleDao().addSchedule(schedule!!)
                     }
 
                 }
             }
-            val direction = CreateScheduleFragmentDirections.actionCreateScheduleFragmentToNavSchedule()
-            findNavController().navigate(direction)
+            findNavController().navigate(R.id.action_createScheduleFragment_to_nav_schedule)
         }
 
         binding.datePicker.setOnClickListener {
@@ -224,7 +226,59 @@ class CreateScheduleFragment : Fragment() {
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE), false).show()
         }
+
+        binding.itemAttachmentAudio.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this audio?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeAudioPath()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentImage.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this image?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeImage()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentLink.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("Remove file attachemnt")
+                .setMessage("Do you want to remove this link?")
+                .setPositiveButton("Yes") {view, id ->
+                    scheduleViewModel.removeLink()
+                }
+                .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
         return binding.root
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val course = binding.listCourses.selectedItem as Course
+        val name = binding.fragmentTaskTitle.text.toString()
+        val desc = binding.fragmentTaskDescription.text.toString()
+        val location = binding.fragmentTaskLocation.text.toString()
+        val date = binding.reminderDate.text.toString()
+        val time = binding.reminderTime.text.toString()
+        val audio = narg.path
+        val image = scheduleViewModel.image.value
+        val file = scheduleViewModel.file.value
+        val schedule = Schedule(course.couserName, name, desc, location, date, time, audio, image.toString(), file)
+        outState.putSerializable("state_schedule", schedule)
+        super.onSaveInstanceState(outState)
+
+    }
+
+    override fun onAudioDialogPositiveClick(data: String) {
+        scheduleViewModel.setAudioPath(data)
+    }
+
 
 }
