@@ -40,7 +40,7 @@ class CreateScheduleFragment : Fragment() {
     private val narg : CreateScheduleFragmentArgs by navArgs()
     lateinit var startforResultGalley : ActivityResultLauncher<Intent>
     private lateinit var scheduleViewModel: CreateScheduleViewModel
-    private lateinit var courses: kotlin.collections.List<Course>
+    private var courses: kotlin.collections.List<Course>? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,8 +56,8 @@ class CreateScheduleFragment : Fragment() {
             lifecycleScope.launch {
                 context?.let {
                     val course = MasterMindDatabase(requireContext()).getCourseDao().findCouser(courseName)
-                    if(course != null) {
-                        binding.listCourses.setSelection(courses.indexOf(course))
+                    if(course != null && courses != null && courses?.indexOf(course)!! >= 0) {
+                        binding.listCourses.setSelection(courses!!.indexOf(course))
                     }
                 }
             }
@@ -120,7 +120,7 @@ class CreateScheduleFragment : Fragment() {
         lifecycleScope.launch {
             context?.let {
                 courses = MasterMindDatabase(it).getCourseDao().getAllCourses()
-                binding.listCourses.adapter = SpinnerAdapter(it, courses)
+                binding.listCourses.adapter = SpinnerAdapter(it, courses!!)
             }
         }
 

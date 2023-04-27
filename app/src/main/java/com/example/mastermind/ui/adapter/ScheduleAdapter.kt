@@ -1,5 +1,6 @@
 package com.example.mastermind.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -35,6 +36,7 @@ class ScheduleAdapter(
         val schedule = schedules[position]
         val course = schedule.course
         holder.schedule = schedule
+        Log.i("image", schedule.image.isNullOrEmpty().toString())
         with(holder.binding) {
             itemTaskProgrammedOneTimeTitle.text = course.toString() + " - " + schedule.name
             itemTaskProgrammedOneTimeDescription.text = schedule.description
@@ -43,7 +45,7 @@ class ScheduleAdapter(
             if(schedule.audio != null) {
                 itemTaskProgrammedOneTimeAttachmentAudio.setColorFilter(R.color.icons_enabled)
             }
-            if(schedule.image != null) {
+            if(schedule.image.isNullOrEmpty() === false) {
                 itemTaskProgrammedOneTimeAttachmentImage.setColorFilter(R.color.icons_enabled)
             }
             if(schedule.file != null) {
