@@ -163,6 +163,10 @@ class CreateScheduleFragment : Fragment(), AudioRecordFragment.audioDialogListen
         }
 
         binding.saveSchedule.setOnClickListener {
+            if(binding.listCourses.selectedItem == null) {
+                Toast.makeText(requireContext(), "Please create new course", Toast.LENGTH_LONG).show()
+                return@setOnClickListener;
+            }
             lifecycleScope.launch {
                 context?.let {
                     val course = binding.listCourses.selectedItem as Course
