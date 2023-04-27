@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -43,6 +45,8 @@ class CreateScheduleFragment : Fragment(), AudioRecordFragment.audioDialogListen
     private lateinit var scheduleViewModel: CreateScheduleViewModel
     private var courses: kotlin.collections.List<Course>? = null
     private var schedule: Schedule? = null
+    private var isPlaying = false
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -259,6 +263,24 @@ class CreateScheduleFragment : Fragment(), AudioRecordFragment.audioDialogListen
                     scheduleViewModel.removeLink()
                 }
                 .setNegativeButton("Cancel") { _, _ -> }.show()
+        }
+
+        binding.itemAttachmentAudioPlayPause.setOnClickListener {
+            if(isPlaying) {
+                isPlaying = false
+                binding.itemAttachmentAudioPlayPause.setImageResource(R.drawable.icon_play)
+                mediaPlayer?.stop()
+            } else {
+                binding.itemAttachmentAudioPlayPause.setImageResource(R.drawable.icon_pause)
+                isPlaying = true
+                mediaPlayer = MediaPlayer()
+                // Set the data source of the MediaPlayer
+                mediaPlayer.setDataSource(requireContext(), Uri.parse(scheduleViewModel.audio.value.toString()))
+                mediaPlayer.prepareAsync()
+                mediaPlayer?.setOnPreparedListener {
+                    mediaPlayer?.start()
+                }
+            }
         }
 
         return binding.root
