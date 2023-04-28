@@ -43,14 +43,18 @@ android {
 
 dependencies {
 
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     def room_version = "2.5.1"
-    def nav_version = "2.5.3"
+    def nav_version = "2.2.1"
 
     // Navigation Graph
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")

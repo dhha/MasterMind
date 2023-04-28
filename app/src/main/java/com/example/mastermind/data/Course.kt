@@ -11,7 +11,5 @@ data class Course(
     val courseName : String,
     val courseDescription : String,
     val faculty : String,
-    val classroom : String,
-    val startDate : LocalDate,
-    val endDate : LocalDate,
+    val classroom : String
 )

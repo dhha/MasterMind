@@ -26,4 +26,8 @@ class CourseViewModel(application: Application) : AndroidViewModel(application) 
             courseRepository.addCourse(course)
         }
     }
+
+    fun getAllCourse(): LiveData<List<Course>> {
+        return getAllCourses
+    }
 }

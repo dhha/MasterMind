@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Course Code"
+        android:hint="Course Code"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="68dp" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Course Name"
+        android:hint="Course Name"
         app:layout_constraintTop_toBottomOf="@+id/etCourseCode"
         tools:layout_editor_absoluteX="81dp" />
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Name"
         app:layout_constraintTop_toBottomOf="@+id/etCourseName"
         tools:layout_editor_absoluteX="92dp" />
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Faculty"
+        android:hint="Faculty"
         app:layout_constraintTop_toBottomOf="@+id/etCourseDescription"
         tools:layout_editor_absoluteX="68dp" />
 
@@ -52,33 +52,15 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Classroom"
+        android:hint="Classroom"
         app:layout_constraintTop_toBottomOf="@+id/etFaculty"
         tools:layout_editor_absoluteX="81dp" />
 
-    <EditText
-        android:id="@+id/etStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@+id/etClassRoom"
-        tools:layout_editor_absoluteX="66dp" />
-
-    <EditText
-        android:id="@+id/etEndDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@+id/etStartDate"
-        tools:layout_editor_absoluteX="53dp" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSaveCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Course"
-        app:layout_constraintTop_toBottomOf="@+id/etEndDate"
+        app:layout_constraintTop_toBottomOf="@+id/etClassRoom"
         tools:layout_editor_absoluteX="117dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

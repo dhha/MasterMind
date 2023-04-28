@@ -12,6 +12,6 @@ interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCourse(course: Course)
 
-    @Query("SELECT * FROM course_table ORDER BY startDate DESC")
+    @Query("SELECT * FROM course_table ORDER BY courseName ASC")
     fun getAllCourses() : LiveData<List<Course>>
 }

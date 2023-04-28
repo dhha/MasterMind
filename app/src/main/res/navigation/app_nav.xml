@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listCourseFragment"
         android:name="com.example.mastermind.fragments.list.ListCourseFragment"
-        android:label="fragment_list_course"
+        android:label="Courses"
         tools:layout="@layout/fragment_list_course" >
         <action
             android:id="@+id/actionFromListToAddCourse"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/addCourseFragment"
         android:name="com.example.mastermind.fragments.add.AddCourseFragment"
-        android:label="fragment_add_course"
+        android:label="Add Course"
         tools:layout="@layout/fragment_add_course" >
         <action
             android:id="@+id/actionFromAddCourseToListCourses"
