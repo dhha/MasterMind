@@ -1,6 +1,8 @@
-package com.example.mastermind.data
+package com.example.mastermind.repository
 
 import androidx.lifecycle.LiveData
+import com.example.mastermind.data.UserDao
+import com.example.mastermind.model.User
 
 class UserRepository(private val userDao: UserDao) {
 

@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mastermind.R
-import com.example.mastermind.data.CourseViewModel
+import com.example.mastermind.viewmodel.CourseViewModel
 import com.example.mastermind.databinding.FragmentListCourseBinding
-import com.example.roomapp.fragments.list.CourseListAdapter
 
 class ListCourseFragment : Fragment() {
 

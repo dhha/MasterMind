@@ -13,6 +13,9 @@
         <action
             android:id="@+id/actionFromListToAddCourse"
             app:destination="@id/addCourseFragment" />
+        <action
+            android:id="@+id/actionFromListCourseToListTimer"
+            app:destination="@id/listTimerFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCourseFragment"
@@ -22,5 +25,44 @@
         <action
             android:id="@+id/actionFromAddCourseToListCourses"
             app:destination="@id/listCourseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listTimerFragment"
+        android:name="com.example.mastermind.fragments.list.ListTimerFragment"
+        android:label="Timers"
+        tools:layout="@layout/fragment_list_timer" >
+        <action
+            android:id="@+id/actionFromListTimerToListCourse"
+            app:destination="@id/listCourseFragment" />
+        <action
+            android:id="@+id/actionFromListTimerToAddTimer"
+            app:destination="@id/addTimerFragment" />
+        <action
+            android:id="@+id/actionFromListTimerToUpdateTimer"
+            app:destination="@id/updateTimerFragment" />
+        <argument
+            android:name="selectedCourse"
+            app:argType="com.example.mastermind.model.Course" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTimerFragment"
+        android:name="com.example.mastermind.fragments.add.AddTimerFragment"
+        android:label="Add Timer"
+        tools:layout="@layout/fragment_add_timer" >
+        <action
+            android:id="@+id/actionFromAddTimerToListTimer"
+            app:destination="@id/listTimerFragment" />
+        <argument
+            android:name="selectedCourse"
+            app:argType="com.example.mastermind.model.Course" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateTimerFragment"
+        android:name="com.example.mastermind.fragments.update.UpdateTimerFragment"
+        android:label="Update Timer"
+        tools:layout="@layout/fragment_update_timer" >
+        <action
+            android:id="@+id/actionFromUpdateTimerToListTimer"
+            app:destination="@id/listTimerFragment" />
     </fragment>
 </navigation>

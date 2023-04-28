@@ -1,13 +1,14 @@
-package com.example.roomapp.fragments.list
+package com.example.mastermind.fragments.list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mastermind.R
-import com.example.mastermind.data.Course
+import com.example.mastermind.model.Course
 
 class CourseListAdapter : RecyclerView.Adapter<CourseListAdapter.MyViewHolder>() {
 
@@ -17,6 +18,7 @@ class CourseListAdapter : RecyclerView.Adapter<CourseListAdapter.MyViewHolder>()
 
         val tvCourseCode : TextView = itemView.findViewById(R.id.tvCourseCode)
         val tvCourseName : TextView = itemView.findViewById(R.id.tvCourseName)
+        val rowCourse : View? = itemView.findViewById(R.id.rowCourse)
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -30,6 +32,11 @@ class CourseListAdapter : RecyclerView.Adapter<CourseListAdapter.MyViewHolder>()
 
         holder.tvCourseCode.text = currentCourse.code
         holder.tvCourseName.text = currentCourse.courseName
+
+        holder.rowCourse?.setOnClickListener{
+            val action = ListCourseFragmentDirections.actionFromListCourseToListTimer(currentCourse)
+            holder.itemView.findNavController().navigate(action)
+        }
 
     }
 

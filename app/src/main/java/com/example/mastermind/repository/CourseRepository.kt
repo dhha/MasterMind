@@ -1,6 +1,8 @@
-package com.example.mastermind.data
+package com.example.mastermind.repository
 
 import androidx.lifecycle.LiveData
+import com.example.mastermind.data.CourseDao
+import com.example.mastermind.model.Course
 
 class CourseRepository(private val courseDao: CourseDao) {
 
@@ -11,4 +13,6 @@ class CourseRepository(private val courseDao: CourseDao) {
         courseDao.addCourse(course)
 
     }
+
+    suspend fun getCourse(courseCode : String) = courseDao.getCourse(courseCode)
 }

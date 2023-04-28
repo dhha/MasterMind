@@ -1,4 +1,4 @@
-package com.example.mastermind.data
+package com.example.mastermind.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

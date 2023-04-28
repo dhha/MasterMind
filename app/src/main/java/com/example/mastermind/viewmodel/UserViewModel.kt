@@ -1,9 +1,12 @@
-package com.example.mastermind.data
+package com.example.mastermind.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.mastermind.data.MastermindDatabase
+import com.example.mastermind.model.User
+import com.example.mastermind.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -5,13 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.mastermind.model.Converters
+import com.example.mastermind.model.Course
+import com.example.mastermind.model.Timer
+import com.example.mastermind.model.User
 
-@Database(entities = [User::class, Course::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Course::class, Timer::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class MastermindDatabase : RoomDatabase() {
 
     abstract fun userDao() : UserDao
     abstract fun courseDao() : CourseDao
+    abstract fun timerDao() : TimerDao
 
     companion object{
 
